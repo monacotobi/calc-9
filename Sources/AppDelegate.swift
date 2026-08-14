@@ -61,8 +61,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupStatusBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        statusItem?.button?.image = NSImage(systemSymbolName: "function",
-                                            accessibilityDescription: "Calc-9")
+
+        // An equals sign — the same glyph as the app icon, so the menu bar and Finder read
+        // as the same app.
+        //
+        // Deliberately a template image (monochrome, tinted by macOS) rather than the
+        // colour icon: menu bar extras have to stay legible on a light menu bar, a dark
+        // one, and translucent over any wallpaper. A dark squircle would be a blob in
+        // light mode.
+        let config = NSImage.SymbolConfiguration(pointSize: 15, weight: .bold)
+        let image = NSImage(systemSymbolName: "equal", accessibilityDescription: "Calc-9")?
+            .withSymbolConfiguration(config)
+        image?.isTemplate = true
+        statusItem?.button?.image = image
 
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Show Calc-9  ⌘⌥9",

@@ -11,7 +11,7 @@ struct CalcView: View {
     /// True when the panel has the keyboard. When false the neon goes out — same treatment
     /// as Clip-9's picker, built in from the start here rather than retrofitted.
     private var isActive: Bool { state.isKey }
-    private var accent: Color { isActive ? Arcade.pink : Arcade.dimText }
+    private var accent: Color { isActive ? Arcade.accent : Arcade.dimText }
 
     /// The expression field is "live" only when the panel has keys AND focus is not in the
     /// tape. Browsing the tape dims the field using the same language.
@@ -34,8 +34,8 @@ struct CalcView: View {
         .background(Arcade.bg)
         .cornerRadius(4)
         .overlay(RoundedRectangle(cornerRadius: 4).stroke(accent, lineWidth: 1.5))
-        .shadow(color: isActive ? Arcade.pink.opacity(0.45) : .clear, radius: 12)
-        .shadow(color: isActive ? Arcade.pink.opacity(0.2)  : .clear, radius: 28)
+        .shadow(color: isActive ? Arcade.accent.opacity(0.45) : .clear, radius: 12)
+        .shadow(color: isActive ? Arcade.accent.opacity(0.2)  : .clear, radius: 28)
         .animation(.easeInOut(duration: 0.12), value: isActive)
         .animation(.easeInOut(duration: 0.08), value: state.focus)
         .onReceive(blinker) { _ in
@@ -82,7 +82,7 @@ struct CalcView: View {
             Rectangle().fill(accent.opacity(0.35)).frame(height: 1)
         }
         .frame(height: CalcLayout.separatorHeight)
-        .shadow(color: isActive ? Arcade.pink.opacity(0.6) : .clear, radius: 4)
+        .shadow(color: isActive ? Arcade.accent.opacity(0.6) : .clear, radius: 4)
     }
 
     // MARK: Tape
@@ -109,8 +109,8 @@ struct CalcView: View {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
             Text(">")
                 .font(.custom(arcadeFont, size: 15).bold())
-                .foregroundColor(fieldLive ? Arcade.pink : Arcade.dimText)
-                .shadow(color: fieldLive ? Arcade.pink.opacity(0.8) : .clear, radius: 6)
+                .foregroundColor(fieldLive ? Arcade.accent : Arcade.dimText)
+                .shadow(color: fieldLive ? Arcade.accent.opacity(0.8) : .clear, radius: 6)
                 .padding(.trailing, 10)
 
             expressionText
@@ -135,7 +135,7 @@ struct CalcView: View {
         let ink = fieldLive ? Color.white : Color(white: 0.55)
         return Text(state.buffer.before).foregroundColor(ink)
             + Text(cursorOn && fieldLive ? "▌" : " ")
-                .foregroundColor(Arcade.pink)
+                .foregroundColor(Arcade.accent)
             + Text(state.buffer.after).foregroundColor(ink)
     }
 
@@ -144,8 +144,8 @@ struct CalcView: View {
         if let error = state.errorText {
             Text(error)
                 .font(.custom(arcadeFont, size: 11).bold())
-                .foregroundColor(Arcade.yellow)
-                .shadow(color: Arcade.yellow.opacity(0.6), radius: 5)
+                .foregroundColor(Arcade.error)
+                .shadow(color: Arcade.error.opacity(0.6), radius: 5)
                 .lineLimit(1)
         } else if let preview = state.preview {
             Text(Engine.format(preview))
@@ -186,20 +186,20 @@ private struct TapeRow: View {
     let isSelected: Bool
     let isActive: Bool
 
-    private var accent: Color { isActive ? Arcade.pink : Arcade.dimText }
+    private var accent: Color { isActive ? Arcade.accent : Arcade.dimText }
 
     var body: some View {
         HStack(spacing: 0) {
             Rectangle()
                 .fill(isSelected ? accent : Color.clear)
                 .frame(width: 3)
-                .shadow(color: isSelected && isActive ? Arcade.pink.opacity(0.9) : .clear, radius: 4)
+                .shadow(color: isSelected && isActive ? Arcade.accent.opacity(0.9) : .clear, radius: 4)
 
             HStack(spacing: 0) {
                 Text(isSelected ? "►" : " ")
                     .font(.custom(arcadeFont, size: 12).bold())
                     .foregroundColor(accent)
-                    .shadow(color: isSelected && isActive ? Arcade.pink.opacity(0.8) : .clear, radius: 4)
+                    .shadow(color: isSelected && isActive ? Arcade.accent.opacity(0.8) : .clear, radius: 4)
                     .frame(width: 16)
 
                 if let entry {
@@ -253,7 +253,7 @@ private struct HeaderButton: View {
 
     private var tint: Color {
         if isHovering || isOn { return Arcade.yellow }
-        return isActive ? Arcade.pink : Arcade.dimText
+        return isActive ? Arcade.accent : Arcade.dimText
     }
 
     var body: some View {

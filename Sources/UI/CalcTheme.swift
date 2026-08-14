@@ -1,18 +1,30 @@
 import SwiftUI
 
-/// Palette, shared with Clip-9 by copy. The two apps are deliberately separate projects,
+/// Palette. Copied from Clip-9 rather than shared — the two apps are separate projects,
 /// so a change here does not reach Clip-9 and vice versa.
+///
+/// **Calc-9 is green where Clip-9 is pink.** The two apps sit side by side in the menu bar
+/// and in the Accessibility list, so they need to be distinguishable at a glance rather
+/// than only by their icon glyph.
 enum Arcade {
     static let bg       = Color(red: 0.031, green: 0.031, blue: 0.047)  // #080812
-    static let pink     = Color(red: 1.0,   green: 0.125, blue: 0.471)  // #FF2078
+    static let green    = Color(red: 0.239, green: 1.0,   blue: 0.620)  // #3DFF9E
     static let cyan     = Color(red: 0.0,   green: 0.898, blue: 1.0)    // #00E5FF
     static let yellow   = Color(red: 1.0,   green: 0.902, blue: 0.0)    // #FFE600
     static let dimText  = Color(red: 0.267, green: 0.267, blue: 0.333)  // #444455
-    static let rowGlow  = Color(red: 1.0,   green: 0.125, blue: 0.471).opacity(0.08)
-    static let inertGlow = Color(red: 0.267, green: 0.267, blue: 0.333).opacity(0.14)
 
-    /// Calc-9's one addition to the palette. Results are what you came for.
-    static let result   = Color(red: 0.239, green: 1.0,   blue: 0.620)  // #3DFF9E
+    /// Borders, separators, prompt, caret, selection. Clip-9 uses pink here.
+    static let accent   = green
+
+    /// The answer. It cannot also be `accent`, or it would stop standing out the moment
+    /// the chrome went green.
+    static let result   = yellow
+
+    /// Errors share the result's slot on screen, so they must not share its colour.
+    static let error    = Color(red: 1.0, green: 0.36, blue: 0.42)  // #FF5C6B
+
+    static let rowGlow   = green.opacity(0.07)
+    static let inertGlow = Color(red: 0.267, green: 0.267, blue: 0.333).opacity(0.14)
 
     /// Footer hints and help text. `dimText` on `bg` is roughly 2:1 contrast — fine as
     /// decoration, unreadable as instructions.
