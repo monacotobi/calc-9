@@ -13,6 +13,10 @@ enum Arcade {
 
     /// Calc-9's one addition to the palette. Results are what you came for.
     static let result   = Color(red: 0.239, green: 1.0,   blue: 0.620)  // #3DFF9E
+
+    /// Footer hints and help text. `dimText` on `bg` is roughly 2:1 contrast — fine as
+    /// decoration, unreadable as instructions.
+    static let hintText = Color(white: 0.92)
 }
 
 let arcadeFont = "Courier New"
@@ -44,5 +48,20 @@ enum CalcLayout {
             + inputHeight
             + separatorHeight
             + footerHeight
+    }
+
+    // MARK: Help sheet
+
+    static let helpRowHeight: CGFloat = 19
+    static let helpSectionHeaderHeight: CGFloat = 24
+    static let helpVerticalPadding: CGFloat = 10
+
+    /// Derived from the content so the two can never drift apart.
+    static var helpContentHeight: CGFloat {
+        let rows = HelpContent.sections.reduce(0) { $0 + $1.rows.count }
+        let body = CGFloat(rows) * helpRowHeight
+            + CGFloat(HelpContent.sections.count) * helpSectionHeaderHeight
+            + helpVerticalPadding * 2
+        return headerHeight + separatorHeight + body + separatorHeight + footerHeight
     }
 }

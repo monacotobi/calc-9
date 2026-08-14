@@ -13,10 +13,21 @@ public enum Parser {
             case .number:
                 output.append(token)
 
+            case .function:
+                // Sits on the stack until its closing paren arrives.
+                stack.append(token)
+
             case .op(let o):
                 if o == .percent {
                     // Postfix: its operand is already emitted, so it goes straight out.
                     output.append(token)
+                    continue
+                }
+                if o.isPrefix {
+                    // A prefix operator binds to whatever comes next, so it must not pop
+                    // pending operators. Popping here would break `2^-3`, turning it into
+                    // `(2^)-3`.
+                    stack.append(token)
                     continue
                 }
                 while case .op(let top)? = stack.last,
@@ -37,6 +48,10 @@ public enum Parser {
                     output.append(top)
                 }
                 guard foundLeft else { throw EngineError.unbalancedParentheses }
+                // A function immediately below its parenthesised argument applies now.
+                if case .function? = stack.last {
+                    output.append(stack.removeLast())
+                }
             }
         }
 

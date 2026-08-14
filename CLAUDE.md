@@ -54,6 +54,14 @@ that is single-file analysis without project context, not a real error.
   library so the pure-Swift logic can be tested with `swift test`. The Xcode app target
   compiles the same files directly. Do not add UI code to `Sources/Engine` — it would break
   `swift test`, which has no AppKit.
+- **Adding a new Swift file requires editing `project.pbxproj` by hand** — four places:
+  a `PBXBuildFile`, a `PBXFileReference`, the enclosing `PBXGroup`'s children, and the
+  `PBXSourcesBuildPhase` files list. Xcode does this for you if you add the file through
+  the IDE.
+
+  **`swift test` will not catch a missed one.** SPM globs the directory, so a file absent
+  from the pbxproj still compiles and tests green while the app fails to build. This has
+  already happened once. Always run the real `xcodebuild` after adding a file.
 - **The hotkey uses Carbon `RegisterEventHotKey`, not a `CGEventTap`.** This is deliberate:
   a tap sees every keystroke system-wide, this sees one combination. Two ordering rules,
   both of which fail *silently* — registration returns `noErr` while nothing fires:

@@ -13,9 +13,13 @@ enum CalcFocus: Equatable {
 /// All mutation happens on the main thread from `CalcWindow`.
 final class CalcState: ObservableObject {
 
-    @Published var expression: String = ""
+    /// The expression plus its caret. The index arithmetic lives in the engine so it can
+    /// be unit tested; this type only publishes changes.
+    @Published var buffer = ExpressionBuffer()
     @Published var tape = Tape(capacity: CalcLayout.tapeCapacity)
     @Published var focus: CalcFocus = .field
+
+    var expression: String { buffer.text }
 
     /// Set from NSPanel's becomeKey/resignKey. The panel is non-activating and stays open
     /// when you click away, so it can be visible while receiving no keys at all.
@@ -23,6 +27,10 @@ final class CalcState: ObservableObject {
 
     /// Shown on Enter when the expression will not evaluate. Cleared on the next keystroke.
     @Published var errorText: String?
+
+    /// The reference sheet. The window resizes when this changes, so only flip it through
+    /// `CalcWindow.setHelp(_:)`.
+    @Published var showingHelp: Bool = false
 
     /// The value shown live to the right of the expression, or nil while nothing evaluates.
     var preview: Double? { Engine.livePreview(of: expression) }
@@ -37,18 +45,36 @@ final class CalcState: ObservableObject {
     func type(_ s: String) {
         errorText = nil
         focus = .field
-        expression.append(s)
+        buffer.insert(s)
     }
 
     func backspace() {
         errorText = nil
-        guard !expression.isEmpty else { return }
-        expression.removeLast()
+        buffer.deleteBackward()
+    }
+
+    func deleteForward() {
+        errorText = nil
+        buffer.deleteForward()
     }
 
     func clear() {
         errorText = nil
-        expression = ""
+        buffer.clear()
+    }
+
+    // MARK: - Caret
+
+    /// Left and right move the caret. From the tape they also drop focus back into the
+    /// field, since moving the caret is a typing gesture.
+    func moveCaretLeft(toStart: Bool = false) {
+        focus = .field
+        toStart ? buffer.moveToStart() : buffer.moveLeft()
+    }
+
+    func moveCaretRight(toEnd: Bool = false) {
+        focus = .field
+        toEnd ? buffer.moveToEnd() : buffer.moveRight()
     }
 
     // MARK: - Tape navigation
@@ -77,7 +103,8 @@ final class CalcState: ObservableObject {
     /// Enter while browsing: insert the selected result and go back to typing.
     func insertSelectedResult() {
         guard case .tape(let i) = focus, let entry = tape[i] else { return }
-        expression.append(Engine.format(entry.value).replacingOccurrences(of: ",", with: ""))
+        // Strip grouping separators — "1,234" would not tokenize.
+        buffer.insert(Engine.format(entry.value).replacingOccurrences(of: ",", with: ""))
         focus = .field
     }
 
@@ -91,7 +118,7 @@ final class CalcState: ObservableObject {
             let value = try Engine.evaluate(expression)
             tape.add(expression: expression, value: value)
             let formatted = Engine.format(value)
-            expression = ""
+            buffer.clear()
             errorText = nil
             focus = .field
             return formatted
@@ -111,6 +138,9 @@ final class CalcState: ObservableObject {
         case .incompleteExpression:      return "ERR — INCOMPLETE"
         case .malformedNumber(let s):    return "ERR — BAD NUMBER \(s)"
         case .unexpectedCharacter(let c): return "ERR — BAD CHAR \(c)"
+        case .unknownIdentifier(let s):  return "ERR — UNKNOWN \(s.uppercased())"
+        case .expectedParenthesis(let s): return "ERR — \(s.uppercased()) NEEDS ( )"
+        case .mathDomain(let s):         return "ERR — \(s.uppercased()) DOMAIN"
         }
     }
 }

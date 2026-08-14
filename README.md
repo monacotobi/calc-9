@@ -6,22 +6,28 @@ were using.
 
 Sibling to [Clip-9](https://github.com/monacotobi/clip-9), and it looks the part.
 
-```
-┌──────────────────────────────────────────┐
-│ 🔢 CALC-9                    3 ON TAPE ✕ │
-├──────────────────────────────────────────┤
-│    1920/16          =             120    │
-│    0.15*89.90       =          13.485    │
-│    (120+80)*3       =             600    │
-├──────────────────────────────────────────┤
-│ > 44*12+_                          528   │
-├──────────────────────────────────────────┤
-│ ENTER KEEP · ↑↓ HISTORY · ⌫ CLEAR · ESC  │
-└──────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="docs/calc-9.png" alt="The Calc-9 panel: a tape of three past results above an expression being typed, with the running total on the right" width="620">
+</p>
 
-The live result shows the **longest valid prefix**, so `44*12+` already reads 528 while you
-are still typing.
+The result updates as you type, and it shows the **longest valid prefix** — so `44*12+`
+already reads 528 while you are still deciding what comes next, rather than blanking out
+on every operator.
+
+### Press ↑ to reuse an earlier result
+
+<p align="center">
+  <img src="docs/calc-9-tape.png" alt="Browsing the tape: a past result selected, the expression field dimmed" width="620">
+</p>
+
+The expression field dims while you browse, so it is obvious where your keystrokes are
+going. Enter drops the selected value into whatever you were building.
+
+### Press i, or ?, for everything it can do
+
+<p align="center">
+  <img src="docs/calc-9-help.png" alt="The built-in reference listing operators, functions, constants and keys" width="560">
+</p>
 
 ## Install
 
@@ -112,6 +118,17 @@ same files — nothing is duplicated, and the tests cover exactly the code that 
 
 The UI, hotkey and paste are not unit tested; they need a real window server and a real
 keyboard.
+
+### Screenshots
+
+The images above are generated, not captured:
+
+```sh
+./Tools/render-screenshots.sh
+```
+
+It compiles the actual `CalcView` and draws it with `ImageRenderer`, so the README shows
+the same code that ships and cannot quietly go stale. Re-run it after any UI change.
 
 ## Limitations
 
