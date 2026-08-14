@@ -21,11 +21,11 @@ enum HelpContent {
 
     static let sections: [Section] = [
         Section(title: "OPERATORS", rows: [
-            Row(symbol: "+ - * /",  detail: "add, subtract, multiply, divide", tint: Arcade.pink),
-            Row(symbol: "^  or  **", detail: "power    2^10 = 1,024", tint: Arcade.pink),
-            Row(symbol: "%",        detail: "divide by 100    100+10% = 100.1", tint: Arcade.pink),
-            Row(symbol: "( )",      detail: "grouping    (2+3)*4 = 20", tint: Arcade.pink),
-            Row(symbol: "-x",       detail: "negate    -2^2 = -4, (-2)^2 = 4", tint: Arcade.pink),
+            Row(symbol: "+ - * /",  detail: "add, subtract, multiply, divide", tint: Arcade.accent),
+            Row(symbol: "^  or  **", detail: "power    2^10 = 1,024", tint: Arcade.accent),
+            Row(symbol: "%",        detail: "divide by 100    100+10% = 100.1", tint: Arcade.accent),
+            Row(symbol: "( )",      detail: "grouping    (2+3)*4 = 20", tint: Arcade.accent),
+            Row(symbol: "-x",       detail: "negate    -2^2 = -4, (-2)^2 = 4", tint: Arcade.accent),
         ]),
         Section(title: "FUNCTIONS — parentheses required", rows: [
             Row(symbol: "sqrt( )",  detail: "square root    sqrt(9) = 3"),
@@ -58,7 +58,7 @@ struct HelpView: View {
             ForEach(HelpContent.sections) { section in
                 Text(section.title)
                     .font(.custom(arcadeFont, size: 10).bold())
-                    .foregroundColor(isActive ? Arcade.pink : Arcade.dimText)
+                    .foregroundColor(isActive ? Arcade.accent : Arcade.dimText)
                     .tracking(2)
                     .frame(height: CalcLayout.helpSectionHeaderHeight, alignment: .bottom)
 
