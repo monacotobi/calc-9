@@ -1,0 +1,333 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB000000000000000000A100 /* Calc9App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A100 /* Calc9App.swift */; };
+		CB000000000000000000A200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A200 /* AppDelegate.swift */; };
+		CB000000000000000000A300 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A300 /* LoginItem.swift */; };
+		CB000000000000000000A400 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A400 /* Tokenizer.swift */; };
+		CB000000000000000000A500 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A500 /* Parser.swift */; };
+		CB000000000000000000A600 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A600 /* Evaluator.swift */; };
+		CB000000000000000000A700 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A700 /* Engine.swift */; };
+		CB000000000000000000A800 /* TapeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A800 /* TapeStore.swift */; };
+		CB000000000000000000A900 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A900 /* HotKeyManager.swift */; };
+		CB000000000000000000AA00 /* PasteSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AA00 /* PasteSimulator.swift */; };
+		CB000000000000000000AB00 /* CalcTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AB00 /* CalcTheme.swift */; };
+		CB000000000000000000AC00 /* CalcState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AC00 /* CalcState.swift */; };
+		CB000000000000000000AD00 /* CalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AD00 /* CalcView.swift */; };
+		CB000000000000000000AE00 /* CalcWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AE00 /* CalcWindow.swift */; };
+		CB000000000000000000AF00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AF00 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CA0000000000000000000000 /* Calc-9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc-9.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA000000000000000000A100 /* Calc9App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calc9App.swift; sourceTree = "<group>"; };
+		CA000000000000000000A200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CA000000000000000000A300 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
+		CA000000000000000000A400 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		CA000000000000000000A500 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		CA000000000000000000A600 /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		CA000000000000000000A700 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		CA000000000000000000A800 /* TapeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeStore.swift; sourceTree = "<group>"; };
+		CA000000000000000000A900 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
+		CA000000000000000000AA00 /* PasteSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSimulator.swift; sourceTree = "<group>"; };
+		CA000000000000000000AB00 /* CalcTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcTheme.swift; sourceTree = "<group>"; };
+		CA000000000000000000AC00 /* CalcState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcState.swift; sourceTree = "<group>"; };
+		CA000000000000000000AD00 /* CalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcView.swift; sourceTree = "<group>"; };
+		CA000000000000000000AE00 /* CalcWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcWindow.swift; sourceTree = "<group>"; };
+		CA000000000000000000AF00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CA000000000000000000B000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA000000000000000000B100 /* Calc-9.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Calc-9.entitlements"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD000000000000000000D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC000000000000000000C1 = {
+			isa = PBXGroup;
+			children = (
+				CC000000000000000000C2 /* Sources */,
+				CC000000000000000000C7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CA000000000000000000A100 /* Calc9App.swift */,
+				CA000000000000000000A200 /* AppDelegate.swift */,
+				CA000000000000000000A300 /* LoginItem.swift */,
+				CC000000000000000000C3 /* Engine */,
+				CC000000000000000000C4 /* HotKey */,
+				CC000000000000000000C5 /* Paste */,
+				CC000000000000000000C6 /* UI */,
+				CA000000000000000000AF00 /* Assets.xcassets */,
+				CA000000000000000000B000 /* Info.plist */,
+				CA000000000000000000B100 /* Calc-9.entitlements */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C3 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				CA000000000000000000A400 /* Tokenizer.swift */,
+				CA000000000000000000A500 /* Parser.swift */,
+				CA000000000000000000A600 /* Evaluator.swift */,
+				CA000000000000000000A700 /* Engine.swift */,
+				CA000000000000000000A800 /* TapeStore.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C4 /* HotKey */ = {
+			isa = PBXGroup;
+			children = (
+				CA000000000000000000A900 /* HotKeyManager.swift */,
+			);
+			path = HotKey;
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C5 /* Paste */ = {
+			isa = PBXGroup;
+			children = (
+				CA000000000000000000AA00 /* PasteSimulator.swift */,
+			);
+			path = Paste;
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CA000000000000000000AB00 /* CalcTheme.swift */,
+				CA000000000000000000AC00 /* CalcState.swift */,
+				CA000000000000000000AD00 /* CalcView.swift */,
+				CA000000000000000000AE00 /* CalcWindow.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CC000000000000000000C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA0000000000000000000000 /* Calc-9.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CT000000000000000000B1 /* Calc-9 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CL000000000000000000L2 /* Build configuration list for PBXNativeTarget "Calc-9" */;
+			buildPhases = (
+				CD000000000000000000D1 /* Sources */,
+				CD000000000000000000D3 /* Frameworks */,
+				CD000000000000000000D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Calc-9";
+			productName = "Calc-9";
+			productReference = CA0000000000000000000000 /* Calc-9.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CP000000000000000000P1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					CT000000000000000000B1 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = CL000000000000000000L1 /* Build configuration list for PBXProject "Calc-9" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CC000000000000000000C1;
+			productRefGroup = CC000000000000000000C7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CT000000000000000000B1 /* Calc-9 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD000000000000000000D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB000000000000000000AF00 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD000000000000000000D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB000000000000000000A100 /* Calc9App.swift in Sources */,
+				CB000000000000000000A200 /* AppDelegate.swift in Sources */,
+				CB000000000000000000A300 /* LoginItem.swift in Sources */,
+				CB000000000000000000A400 /* Tokenizer.swift in Sources */,
+				CB000000000000000000A500 /* Parser.swift in Sources */,
+				CB000000000000000000A600 /* Evaluator.swift in Sources */,
+				CB000000000000000000A700 /* Engine.swift in Sources */,
+				CB000000000000000000A800 /* TapeStore.swift in Sources */,
+				CB000000000000000000A900 /* HotKeyManager.swift in Sources */,
+				CB000000000000000000AA00 /* PasteSimulator.swift in Sources */,
+				CB000000000000000000AB00 /* CalcTheme.swift in Sources */,
+				CB000000000000000000AC00 /* CalcState.swift in Sources */,
+				CB000000000000000000AD00 /* CalcView.swift in Sources */,
+				CB000000000000000000AE00 /* CalcWindow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CF000000000000000000F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)");
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CF000000000000000000F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CF000000000000000000F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sources/Calc-9.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/../Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.supergloops.calc9;
+				PRODUCT_MODULE_NAME = Calc9;
+				PRODUCT_NAME = "Calc-9";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		CF000000000000000000F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Sources/Calc-9.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/../Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.supergloops.calc9;
+				PRODUCT_MODULE_NAME = Calc9;
+				PRODUCT_NAME = "Calc-9";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CL000000000000000000L1 /* Build configuration list for PBXProject "Calc-9" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF000000000000000000F1 /* Debug */,
+				CF000000000000000000F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CL000000000000000000L2 /* Build configuration list for PBXNativeTarget "Calc-9" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF000000000000000000F3 /* Debug */,
+				CF000000000000000000F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CP000000000000000000P1 /* Project object */;
+}

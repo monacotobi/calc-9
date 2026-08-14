@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Engine tests
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      # The engine is pure Swift with no AppKit, so it tests without a window server.
+      - name: swift test
+        run: swift test
+
+  build:
+    name: Build app
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: xcodebuild -version
+
+      - name: Lint project file
+        run: plutil -lint Calc-9.xcodeproj/project.pbxproj
+
+      # CONFIGURATION_BUILD_DIR, not -derivedDataPath: xcodebuild rejects -derivedDataPath
+      # unless -scheme is also given, and no shared scheme is committed.
+      - name: Build
+        run: |
+          xcodebuild -project Calc-9.xcodeproj \
+                     -target Calc-9 \
+                     -configuration Release \
+                     CONFIGURATION_BUILD_DIR="$PWD/build" \
+                     CODE_SIGNING_ALLOWED=NO \
+                     build
+
+      - name: Verify app bundle
+        run: |
+          APP="build/Calc-9.app"
+          test -d "$APP" || { echo "::error::$APP was not produced"; exit 1; }
+          test -x "$APP/Contents/MacOS/Calc-9" || { echo "::error::executable missing"; exit 1; }
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$APP/Contents/Info.plist"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Calc-9-app
+          path: build/Calc-9.app
+          if-no-files-found: error
+
+  release:
+    name: Release
+    needs: [test, build]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: macos-15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Release
+        run: |
+          xcodebuild -project Calc-9.xcodeproj \
+                     -target Calc-9 \
+                     -configuration Release \
+                     CONFIGURATION_BUILD_DIR="$PWD/build" \
+                     CODE_SIGNING_ALLOWED=NO \
+                     build
+      # ditto preserves bundle structure; plain zip can corrupt a .app.
+      - name: Package
+        run: ditto -c -k --sequesterRsrc --keepParent build/Calc-9.app Calc-9.zip
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Calc-9.zip
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            1. Download and unzip `Calc-9.zip`, move `Calc-9.app` to Applications.
+            2. **Right-click the app and choose Open** the first time — this build is
+               unsigned, so macOS warns the developer cannot be verified.
+            3. Grant Accessibility when asked. It is used only to paste results; decline
+               and results are still copied to your clipboard.
