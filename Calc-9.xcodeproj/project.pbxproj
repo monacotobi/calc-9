@@ -14,9 +14,11 @@
 		CB000000000000000000A500 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A500 /* Parser.swift */; };
 		CB000000000000000000A600 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A600 /* Evaluator.swift */; };
 		CB000000000000000000A700 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A700 /* Engine.swift */; };
+		CB000000000000000000B200 /* ExpressionBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000B200 /* ExpressionBuffer.swift */; };
 		CB000000000000000000A800 /* TapeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A800 /* TapeStore.swift */; };
 		CB000000000000000000A900 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000A900 /* HotKeyManager.swift */; };
 		CB000000000000000000AA00 /* PasteSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AA00 /* PasteSimulator.swift */; };
+		CB000000000000000000B300 /* HelpContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000B300 /* HelpContent.swift */; };
 		CB000000000000000000AB00 /* CalcTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AB00 /* CalcTheme.swift */; };
 		CB000000000000000000AC00 /* CalcState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AC00 /* CalcState.swift */; };
 		CB000000000000000000AD00 /* CalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000AD00 /* CalcView.swift */; };
@@ -33,9 +35,11 @@
 		CA000000000000000000A500 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		CA000000000000000000A600 /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		CA000000000000000000A700 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		CA000000000000000000B200 /* ExpressionBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionBuffer.swift; sourceTree = "<group>"; };
 		CA000000000000000000A800 /* TapeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeStore.swift; sourceTree = "<group>"; };
 		CA000000000000000000A900 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
 		CA000000000000000000AA00 /* PasteSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSimulator.swift; sourceTree = "<group>"; };
+		CA000000000000000000B300 /* HelpContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpContent.swift; sourceTree = "<group>"; };
 		CA000000000000000000AB00 /* CalcTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcTheme.swift; sourceTree = "<group>"; };
 		CA000000000000000000AC00 /* CalcState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcState.swift; sourceTree = "<group>"; };
 		CA000000000000000000AD00 /* CalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcView.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 				CA000000000000000000A600 /* Evaluator.swift */,
 				CA000000000000000000A700 /* Engine.swift */,
 				CA000000000000000000A800 /* TapeStore.swift */,
+				CA000000000000000000B200 /* ExpressionBuffer.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				CA000000000000000000AB00 /* CalcTheme.swift */,
+				CA000000000000000000B300 /* HelpContent.swift */,
 				CA000000000000000000AC00 /* CalcState.swift */,
 				CA000000000000000000AD00 /* CalcView.swift */,
 				CA000000000000000000AE00 /* CalcWindow.swift */,
@@ -205,9 +211,11 @@
 				CB000000000000000000A600 /* Evaluator.swift in Sources */,
 				CB000000000000000000A700 /* Engine.swift in Sources */,
 				CB000000000000000000A800 /* TapeStore.swift in Sources */,
+				CB000000000000000000B200 /* ExpressionBuffer.swift in Sources */,
 				CB000000000000000000A900 /* HotKeyManager.swift in Sources */,
 				CB000000000000000000AA00 /* PasteSimulator.swift in Sources */,
 				CB000000000000000000AB00 /* CalcTheme.swift in Sources */,
+				CB000000000000000000B300 /* HelpContent.swift in Sources */,
 				CB000000000000000000AC00 /* CalcState.swift in Sources */,
 				CB000000000000000000AD00 /* CalcView.swift in Sources */,
 				CB000000000000000000AE00 /* CalcWindow.swift in Sources */,

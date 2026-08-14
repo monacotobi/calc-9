@@ -3,6 +3,7 @@ import SwiftUI
 struct CalcView: View {
     @ObservedObject var state: CalcState
     let onDismiss: () -> Void
+    var onToggleHelp: () -> Void = {}
 
     @State private var cursorOn = true
     private let blinker = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
@@ -20,9 +21,13 @@ struct CalcView: View {
         VStack(spacing: 0) {
             header
             separator
-            tapeView
-            separator
-            inputLine
+            if state.showingHelp {
+                HelpView(isActive: isActive)
+            } else {
+                tapeView
+                separator
+                inputLine
+            }
             separator
             footer
         }
@@ -51,15 +56,21 @@ struct CalcView: View {
 
             Spacer()
 
-            Text(state.tape.isEmpty
-                 ? "NO TAPE"
-                 : "\(state.tape.count) ON TAPE")
-                .font(.custom(arcadeFont, size: 11).bold())
-                .foregroundColor(accent)
-                .tracking(1)
+            if !state.showingHelp {
+                Text(state.tape.isEmpty
+                     ? "NO TAPE"
+                     : "\(state.tape.count) ON TAPE")
+                    .font(.custom(arcadeFont, size: 11).bold())
+                    .foregroundColor(accent)
+                    .tracking(1)
+            }
 
-            CloseButton(action: onDismiss, isActive: isActive)
+            HeaderButton(glyph: "i", action: onToggleHelp,
+                         isActive: isActive, isOn: state.showingHelp)
                 .padding(.leading, 12)
+
+            HeaderButton(glyph: "✕", action: onDismiss, isActive: isActive)
+                .padding(.leading, 6)
         }
         .padding(.horizontal, 14)
         .frame(height: CalcLayout.headerHeight)
@@ -102,9 +113,8 @@ struct CalcView: View {
                 .shadow(color: fieldLive ? Arcade.pink.opacity(0.8) : .clear, radius: 6)
                 .padding(.trailing, 10)
 
-            Text(state.expression + (cursorOn && fieldLive ? "_" : " "))
+            expressionText
                 .font(.custom(arcadeFont, size: 15).bold())
-                .foregroundColor(fieldLive ? .white : Color(white: 0.55))
                 .lineLimit(1)
                 .truncationMode(.head)
 
@@ -115,6 +125,18 @@ struct CalcView: View {
         .padding(.horizontal, 14)
         .frame(height: CalcLayout.inputHeight)
         .background(fieldLive ? Arcade.rowGlow : Color.clear)
+    }
+
+    /// The expression split around the caret, so the block cursor can sit mid-string.
+    ///
+    /// The caret glyph blinks between "▌" and a space rather than appearing and vanishing:
+    /// in a monospaced font both are one cell wide, so the text either side never shifts.
+    private var expressionText: Text {
+        let ink = fieldLive ? Color.white : Color(white: 0.55)
+        return Text(state.buffer.before).foregroundColor(ink)
+            + Text(cursorOn && fieldLive ? "▌" : " ")
+                .foregroundColor(Arcade.pink)
+            + Text(state.buffer.after).foregroundColor(ink)
     }
 
     @ViewBuilder
@@ -138,14 +160,18 @@ struct CalcView: View {
 
     private var footer: some View {
         HStack {
-            if state.focus == .field {
-                Text("ENTER KEEP · ↑↓ HISTORY · ⌫ CLEAR · ESC QUIT")
+            if state.showingHelp {
+                Text("ESC or ? TO GO BACK")
+            } else if state.focus == .field {
+                Text("ENTER KEEP · ↑↓ TAPE · ←→ MOVE · ? HELP · ESC QUIT")
             } else {
                 Text("ENTER INSERT VALUE · ↑↓ MOVE · ESC BACK")
             }
         }
-        .font(.custom(arcadeFont, size: 9).bold())
-        .foregroundColor(isActive ? Arcade.dimText : Arcade.dimText.opacity(0.5))
+        // Bumped from 9pt dimText: that was ~2:1 contrast on this background, which reads
+        // as decoration rather than instructions.
+        .font(.custom(arcadeFont, size: 10).bold())
+        .foregroundColor(isActive ? Arcade.hintText : Arcade.hintText.opacity(0.35))
         .tracking(1)
         .frame(height: CalcLayout.footerHeight)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -217,42 +243,46 @@ private struct TapeRow: View {
 
 // MARK: - Close button
 
-private struct CloseButton: View {
+private struct HeaderButton: View {
+    let glyph: String
     let action: () -> Void
     let isActive: Bool
+    var isOn: Bool = false
 
     @State private var isHovering = false
 
     private var tint: Color {
-        if isHovering { return Arcade.yellow }
+        if isHovering || isOn { return Arcade.yellow }
         return isActive ? Arcade.pink : Arcade.dimText
     }
 
     var body: some View {
         Button(action: action) {
-            Text("✕")
+            Text(glyph)
                 .font(.custom(arcadeFont, size: 12).bold())
                 .foregroundColor(tint)
                 .shadow(color: isActive || isHovering ? tint.opacity(0.8) : .clear, radius: 4)
                 .frame(width: 18, height: 18)
-                .overlay(Rectangle().stroke(isHovering ? Arcade.yellow : tint.opacity(0.5), lineWidth: 1))
+                .overlay(Rectangle().stroke(isHovering || isOn ? Arcade.yellow : tint.opacity(0.5),
+                                            lineWidth: 1))
                 // The panel is draggable by its background; give the button a solid hit area.
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .onHover { isHovering = $0 }
-        .help("Close (Esc)")
-        .accessibilityLabel("Close")
+        .help(glyph == "i" ? "What Calc-9 can do" : "Close (Esc)")
+        .accessibilityLabel(glyph == "i" ? "Help" : "Close")
     }
 }
 
 #if DEBUG
 private func previewState(expression: String,
+                          caret: Int? = nil,
                           focus: CalcFocus = .field,
                           isKey: Bool = true,
                           entries: Int = 3) -> CalcState {
     let s = CalcState()
-    s.expression = expression
+    s.buffer = ExpressionBuffer(text: expression, caret: caret)
     s.focus = focus
     s.isKey = isKey
     let samples = [("1920/16", 120.0), ("0.15*89.90", 13.485), ("(120+80)*3", 600.0)]
@@ -262,6 +292,13 @@ private func previewState(expression: String,
 
 #Preview("Typing") {
     CalcView(state: previewState(expression: "44*12+"), onDismiss: {})
+        .frame(width: CalcLayout.width, height: CalcLayout.contentHeight)
+        .padding(20).background(Color.black)
+}
+
+// Caret parked mid-expression after arrowing left.
+#Preview("Caret in the middle") {
+    CalcView(state: previewState(expression: "44*12+16", caret: 4), onDismiss: {})
         .frame(width: CalcLayout.width, height: CalcLayout.contentHeight)
         .padding(20).background(Color.black)
 }
